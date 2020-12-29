@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.github.spacedelivery.androidapp.R
 import com.github.spacedelivery.androidapp.core.extensions.toast
 
 abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
