@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">4d174638745c30529af1059f02465d16</string>
-    
+    <string name="app_name">Space Delivery App</string>
+
+    <string name="empty" />
+
+    <!-- Error messages -->
+    <string name="error_general_message">Error! Please try again.</string>
+    <string name="error_internet_connection">No internet connection! Please try again.</string>
+
     <!-- General -->
     <string name="menu_home">Home</string>
     <string name="menu_favourites">Favourites</string>
