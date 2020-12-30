@@ -2,6 +2,7 @@ package com.github.spacedelivery.androidapp.ui
 
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     private val navigationInvisibleScreens = listOf(
+        R.id.splashFragment,
         R.id.createSpaceVehicleFragment
     )
 
