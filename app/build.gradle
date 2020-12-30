@@ -74,6 +74,11 @@ dependencies {
     implementation navigation.fragmentKtx
     implementation navigation.uiKtx
 
+    //Room
+    implementation room.runtime
+    kapt room.kapt
+    implementation room.ktx
+
     //Koin for dependency injection
     implementation koin.core
     implementation koin.viewModel

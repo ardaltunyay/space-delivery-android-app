@@ -11,6 +11,7 @@ ext {
     def constraintLayoutVersion = '2.0.4'
     def recyclerViewVersion = '1.1.0'
     def lifecycleVersion = '2.2.0'
+    def roomVersion = "2.2.6"
     def retrofitVersion = '2.9.0'
     def okhttpVersion = "4.9.0"
     def gsonVersion = '2.8.6'
@@ -26,7 +27,7 @@ ext {
                     lifecycle   : [
                             liveDataKtx : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
                             viewModelKtx : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-                    ],
+                    ]
 
             ],
 
@@ -47,6 +48,12 @@ ext {
             navigation = [
                     fragmentKtx: "androidx.navigation:navigation-fragment-ktx:$nav_version",
                     uiKtx      : "androidx.navigation:navigation-ui-ktx:$nav_version"
+            ],
+
+            room = [
+                    runtime: "androidx.room:room-runtime:$roomVersion",
+                    kapt: "androidx.room:room-compiler:$roomVersion",
+                    ktx: "androidx.room:room-ktx:$roomVersion"
             ],
 
             koin = [
