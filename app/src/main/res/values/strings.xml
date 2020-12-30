@@ -8,6 +8,16 @@
     <string name="error_internet_connection">No internet connection! Please try again.</string>
 
     <!-- General -->
+    <string name="welcome">Welcome!!</string>
     <string name="menu_home">Home</string>
     <string name="menu_favourites">Favourites</string>
+
+    <!-- Create Space Vehicle Screen -->
+    <string name="create_space_vehicle_button">CREATE SPACE VEHICLE</string>
+    <string name="create_space_vehicle_remaning_points">Remaining Points:</string>
+    <string name="create_space_vehicle_name">Name</string>
+    <string name="create_space_vehicle_strength">Strength</string>
+    <string name="create_space_vehicle_speed">Speed</string>
+    <string name="create_space_vehicle_capacity">Capacity</string>
+
 </resources>
