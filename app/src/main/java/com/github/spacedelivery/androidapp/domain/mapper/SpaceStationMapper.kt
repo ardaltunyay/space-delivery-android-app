@@ -12,7 +12,8 @@ fun SpaceStationResponse.toDomain(): SpaceStationDomain =
         capacity = capacity,
         stock = stock,
         need = need,
-        isFavorite = false
+        isFavorite = false,
+        isActive = true
     )
 
 fun SpaceStationEntity.toDomain(): SpaceStationDomain =
@@ -23,7 +24,8 @@ fun SpaceStationEntity.toDomain(): SpaceStationDomain =
         capacity = capacity,
         stock = stock,
         need = need,
-        isFavorite = isFavorite
+        isFavorite = isFavorite,
+        isActive = isActive
     )
 
 fun SpaceStationDomain.toEntity(): SpaceStationEntity =
@@ -34,5 +36,6 @@ fun SpaceStationDomain.toEntity(): SpaceStationEntity =
         capacity = capacity,
         stock = stock,
         need = need,
-        isFavorite = isFavorite
+        isFavorite = isFavorite,
+        isActive = isActive
     )

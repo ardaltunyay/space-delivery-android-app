@@ -11,7 +11,8 @@ data class SpaceStationDomain(
     val capacity: Int,
     val stock: Int,
     val need: Int,
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
+    val isActive: Boolean
 ) {
 
     fun getDistanceFrom(x: Int, y: Int): Int {
