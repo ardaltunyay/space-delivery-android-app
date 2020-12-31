@@ -28,4 +28,8 @@
     <string name="home_search_space_station_text">Search station</string>
     <string name="home_starting_travel_text">The trip is starting</string>
 
+    <!-- Favorite Station Screen -->
+    <string name="favorite_stations_title">Favourite Stations</string>
+    <string name="favorite_list_empty">No results were found</string>
+
 </resources>

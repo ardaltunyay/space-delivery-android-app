@@ -1,32 +1,42 @@
 package com.github.spacedelivery.androidapp.ui.favourite_stations
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.github.spacedelivery.androidapp.R
+import com.github.spacedelivery.androidapp.core.base.BaseFragment
+import com.github.spacedelivery.androidapp.core.listeners.ItemClickListener
+import com.github.spacedelivery.androidapp.databinding.FragmentFavouriteStationsBinding
+import com.github.spacedelivery.androidapp.ui.favourite_stations.adapter.FavoriteSpaceStationAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavouriteStationsFragment : Fragment() {
+class FavouriteStationsFragment :
+    BaseFragment<FavouriteStationsViewModel, FragmentFavouriteStationsBinding>(R.layout.fragment_favourite_stations) {
 
-    companion object {
-        fun newInstance() = FavouriteStationsFragment()
+    private val favoriteSpaceStationAdapter: FavoriteSpaceStationAdapter by lazy(
+        LazyThreadSafetyMode.NONE
+    ) {
+        FavoriteSpaceStationAdapter()
     }
 
-    private lateinit var viewModel: FavouriteStationsViewModel
+    override val viewModel: FavouriteStationsViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_favourite_stations, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
+
+        setFavoriteSpaceStationAdapter()
+
+        viewModel.favoriteSpaceStations.observe(viewLifecycleOwner) { list ->
+            favoriteSpaceStationAdapter.updateList(list)
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FavouriteStationsViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun setFavoriteSpaceStationAdapter() {
+        binding.rvFavoriteSpaceStation.adapter = favoriteSpaceStationAdapter
+        favoriteSpaceStationAdapter.setClickListener(ItemClickListener {
+            viewModel.toggleFavoriteSpaceStation(it)
+        })
     }
+
 
 }
