@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.github.spacedelivery.androidapp.ui.home.HomeViewModel" />
+
+        <variable
+            name="currentSpaceStation"
+            type="com.github.spacedelivery.androidapp.ui.home.model.SpaceStationUIModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="32dp"
+        tools:context=".ui.create_space_vehicle.CreateSpaceVehicleFragment">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvUgs"
+            style="@style/HomePropertyStyle.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/home_ugs(viewModel.currentProperties.UGS)}"
+            app:layout_constraintEnd_toStartOf="@id/tvEus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".30"
+            tools:text="UGS: 5000" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvEus"
+            style="@style/HomePropertyStyle.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/home_eus(viewModel.currentProperties.EUS)}"
+            app:layout_constraintEnd_toStartOf="@id/tvDs"
+            app:layout_constraintStart_toEndOf="@id/tvUgs"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".30"
+            tools:text="EUS: 5000" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDs"
+            style="@style/HomePropertyStyle.Primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/home_ds(viewModel.currentProperties.DS)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvEus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".30"
+            tools:text="DS: 5000" />
+
+        <View
+            android:id="@+id/vLine"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDs" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSpaceVehicleName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{viewModel.spaceVehicle.name}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintEnd_toStartOf="@id/tvDamageCapacity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vLine"
+            tools:text="Vehicle Name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDamageCapacity"
+            style="@style/HomePropertyStyle.Outline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="16dp"
+            android:minWidth="80dp"
+            android:text="@{String.valueOf(viewModel.spaceVehicle.damageCapacity)}"
+            app:layout_constraintBottom_toBottomOf="@id/tvSpaceVehicleName"
+            app:layout_constraintEnd_toStartOf="@id/tvNone"
+            app:layout_constraintTop_toTopOf="@id/tvSpaceVehicleName"
+            tools:text="100" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvNone"
+            style="@style/HomePropertyStyle.Outline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="16dp"
+            android:minWidth="80dp"
+            android:text="@{String.valueOf(viewModel.currentProperties.damageAfterSeconds()) + `s`}"
+            app:layout_constraintBottom_toBottomOf="@id/tvSpaceVehicleName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvSpaceVehicleName"
+            tools:text="100" />
+
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/svSpaceStation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="24dp"
+            android:background="?attr/colorBackgroundFloating"
+            android:elevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSpaceVehicleName"
+            app:queryHint="@string/home_search_space_station_text" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpSpaceStation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/tvCurrentStationName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/svSpaceStation" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvCurrentStationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.currentSpaceStation.name}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Dünya" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

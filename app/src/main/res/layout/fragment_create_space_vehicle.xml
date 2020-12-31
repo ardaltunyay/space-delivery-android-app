@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.github.spacedelivery.androidapp.ui.create_space_vehicle.CreateSpaceVehicleViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="32dp"
+            tools:context=".ui.create_space_vehicle.CreateSpaceVehicleFragment">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvScore"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:text="@string/create_space_vehicle_remaning_points"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textColor="?attr/colorOnPrimary" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:minWidth="50dp"
+                        android:padding="8dp"
+                        android:text="@{String.valueOf(viewModel.remainingPoints)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        tools:text="15" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:singleLine="true"
+                android:text="@string/create_space_vehicle_name"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvScore" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:text="@={viewModel.name}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvStrength"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:singleLine="true"
+                android:text="@string/create_space_vehicle_strength"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilName" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slStrength"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                android:value="@{viewModel.strength.value}"
+                android:valueFrom="0"
+                android:valueTo="@{viewModel.strength.maxValue}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvStrength"
+                tools:valueTo="15" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSpeed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:singleLine="true"
+                android:text="@string/create_space_vehicle_speed"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slStrength" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slSpeed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                android:value="@{viewModel.speed.value}"
+                android:valueFrom="0"
+                android:valueTo="@{viewModel.speed.maxValue}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSpeed"
+                tools:valueTo="15" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCapacity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:singleLine="true"
+                android:text="@string/create_space_vehicle_capacity"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slSpeed" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slCapacity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                android:value="@{viewModel.capacity.value}"
+                android:valueFrom="0"
+                android:valueTo="@{viewModel.capacity.maxValue}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCapacity"
+                tools:valueTo="15" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:enabled="@{viewModel.buttonStatus}"
+                android:onClick="@{() -> viewModel.createSpaceVehicle()}"
+                android:paddingHorizontal="36dp"
+                android:paddingVertical="18dp"
+                android:text="@string/create_space_vehicle_button"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slCapacity" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

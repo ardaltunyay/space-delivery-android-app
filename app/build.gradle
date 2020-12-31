@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -12,7 +14,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,23 +25,90 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    flavorDimensions "type"
+    productFlavors {
+        dev {
+            dimension "type"
+            applicationIdSuffix ".dev"
+            buildConfigField "String", "BASE_URL", "\"https://run.mocky.io/v3/\""
+        }
+
+        prod {
+            dimension "type"
+            buildConfigField "String", "BASE_URL", "\"https://run.mocky.io/v3/\""
+        }
     }
 }
 
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //AndroidX
+    implementation androidX.coreKtx
+    implementation androidX.appCompat
+    implementation androidX.constraint
+    implementation androidX.recyclerView
+    implementation androidX.viewPager2
+    implementation androidX.legacy
+    implementation androidX.lifecycle.liveDataKtx
+    implementation androidX.lifecycle.viewModelKtx
+
+    //Material Design
+    implementation androidX.material
+
+    //Navigation component
+    implementation navigation.fragmentKtx
+    implementation navigation.uiKtx
+
+    //Room
+    implementation room.runtime
+    kapt room.kapt
+    implementation room.ktx
+
+    //Koin for dependency injection
+    implementation koin.core
+    implementation koin.viewModel
+
+    //Retrofit
+    implementation square.retrofit.retrofit
+    implementation square.retrofit.converterGson
+
+    //Okhttp
+    implementation platform(square.okhttp.bom)
+    implementation square.okhttp.okhttp
+    implementation square.okhttp.loggingInterceptor
+
+    //Gson
+    implementation google.gson
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+
+
+    //Testing
+    testImplementation unitTest.jUnit
+    testImplementation unitTest.mockk
+    testImplementation unitTest.kotlinTestRunner
+    testImplementation unitTest.jFixture
+    testImplementation unitTest.androidXCoreTesting
+    testImplementation unitTest.coroutinesTest
+
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation androidTest.extJUnit
+    androidTestImplementation androidTest.espresso
 }
