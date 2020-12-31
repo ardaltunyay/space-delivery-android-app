@@ -5,6 +5,7 @@ import com.github.spacedelivery.androidapp.data.local.dao.ISpaceStationDao
 import com.github.spacedelivery.androidapp.data.local.preferences.LocalPreferences
 import com.github.spacedelivery.androidapp.data.remote.SpaceStationRemoteDataSource
 import com.github.spacedelivery.androidapp.domain.mapper.toDomain
+import com.github.spacedelivery.androidapp.domain.mapper.toEntity
 import com.github.spacedelivery.androidapp.domain.model.SpaceStationDomain
 
 class SpaceStationRepository(
@@ -31,4 +32,13 @@ class SpaceStationRepository(
     suspend fun fetLocalSpaceStations(): List<SpaceStationDomain>? {
         return spaceStationDao.getAllSpaceStations()?.map { it.toDomain() }
     }
+
+    suspend fun fetchFavoriteSpaceStations(): List<SpaceStationDomain>? {
+        return spaceStationDao.getFavoriteSpaceStations()?.map { it.toDomain() }
+    }
+
+    suspend fun updateSpaceStation(spaceStationDomain: SpaceStationDomain) {
+        spaceStationDao.update(spaceStationDomain.toEntity())
+    }
+
 }

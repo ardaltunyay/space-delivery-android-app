@@ -16,6 +16,11 @@ class SpaceStationUseCase(
         return spaceStationRepository.fetchCurrentSpacStation()
     }
 
+    suspend fun fetchFavoriteSpaceStations(): Result<List<SpaceStationDomain>> {
+        val result = spaceStationRepository.fetchFavoriteSpaceStations()
+        return Result.Success(result)
+    }
+
     suspend fun fetchSpaceStations(): Result<List<SpaceStationDomain>> {
 
         val remoteList =

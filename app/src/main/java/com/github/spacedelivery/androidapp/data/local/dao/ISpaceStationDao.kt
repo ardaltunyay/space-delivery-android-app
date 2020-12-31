@@ -24,4 +24,7 @@ interface ISpaceStationDao {
     @Query("SELECT * from space_station")
     suspend fun getAllSpaceStations(): List<SpaceStationEntity>?
 
+    @Query("SELECT * from space_station WHERE favorite = 1")
+    suspend fun getFavoriteSpaceStations(): List<SpaceStationEntity>?
+
 }
