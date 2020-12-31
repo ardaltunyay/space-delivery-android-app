@@ -4,7 +4,7 @@ import androidx.room.*
 import com.github.spacedelivery.androidapp.data.local.entity.SpaceVehicleEntity
 
 @Dao
-interface SpaceVehicleDao {
+interface ISpaceVehicleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(spaceVehicle: SpaceVehicleEntity)
