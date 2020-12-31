@@ -50,6 +50,7 @@ class SpaceVehicleUseCase(
         spaceVehicleRepository.create(domainModel.toEntity())
         spaceStationUseCase.updateCurrentSpaceStation(spaceStationDomain)
         currentPropertiesRepository.updateCurrentProperties(currentPropertiesDomain)
+        spaceStationUseCase.addSpaceStation(spaceStationDomain)
 
         val spaceVehicle = spaceVehicleRepository.get(1)
 

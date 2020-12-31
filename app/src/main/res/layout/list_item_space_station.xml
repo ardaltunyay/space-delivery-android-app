@@ -80,6 +80,7 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="@string/home_space_station_travel_button"
+                android:enabled="@{spaceStationUIModel.active}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

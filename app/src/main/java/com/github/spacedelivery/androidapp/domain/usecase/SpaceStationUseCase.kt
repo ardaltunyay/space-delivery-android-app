@@ -1,12 +1,20 @@
 package com.github.spacedelivery.androidapp.domain.usecase
 
 import com.github.spacedelivery.androidapp.core.network.Result
+import com.github.spacedelivery.androidapp.data.repository.CurrentPropertiesRepository
 import com.github.spacedelivery.androidapp.data.repository.SpaceStationRepository
+import com.github.spacedelivery.androidapp.data.repository.SpaceVehicleRepository
 import com.github.spacedelivery.androidapp.domain.model.SpaceStationDomain
 
 class SpaceStationUseCase(
-    private val spaceStationRepository: SpaceStationRepository
+    private val spaceStationRepository: SpaceStationRepository,
+    private val currentPropertiesRepository: CurrentPropertiesRepository,
+    private val spaceVehicleRepository: SpaceVehicleRepository
 ) {
+
+    suspend fun addSpaceStation(spaceStationDomain: SpaceStationDomain) {
+        spaceStationRepository.addSpaceStation(spaceStationDomain)
+    }
 
     suspend fun updateCurrentSpaceStation(spaceStationDomain: SpaceStationDomain?) {
         spaceStationRepository.updateCurrentSpaceStation(spaceStationDomain)
@@ -66,5 +74,66 @@ class SpaceStationUseCase(
             spaceStationRepository.updateSpaceStation(spaceStationDomain.copy(isFavorite = !spaceStationDomain.isFavorite))
         }
 
+    }
+
+    suspend fun getTravelToSpaceStation(targetStation: SpaceStationDomain): Result<Boolean> {
+        try {
+            val world = SpaceStationDomain(
+                name = "Dünya",
+                coordinateX = 0,
+                coordinateY = 0,
+                capacity = 0,
+                stock = 0,
+                need = 0,
+                isFavorite = false,
+                isActive = false
+            )
+
+            val currentSation = spaceStationRepository.fetchCurrentSpacStation()!!
+            val currentProperties = currentPropertiesRepository.fetchCurrentProperties()!!
+            val spaceVehicle = spaceVehicleRepository.get(1)!!
+
+            val spendEUS =
+                currentSation.getDistanceFrom(targetStation.coordinateX, targetStation.coordinateY)
+
+            //Check conditions
+            val result = when {
+                currentProperties.UGS == 0 -> Result.Error(Exception("There are not UGS!"))
+                currentProperties.EUS < spendEUS -> Result.Error(Exception("There are not EUS or not enough!"))
+                spaceVehicle.damageCapacity == 0 -> Result.Error(Exception("There are not damage capacity!"))
+                else -> null
+            }
+
+            if (result != null) {
+                spaceStationRepository.updateCurrentSpaceStation(world)
+                return result
+            }
+
+            //Values
+            val newUGS =
+                if (currentProperties.UGS < targetStation.need) 0 else currentProperties.UGS - targetStation.need
+
+            val newEUS = currentProperties.EUS - spendEUS
+            val newStock = targetStation.stock + (currentProperties.UGS - newUGS)
+            val newNeed = targetStation.capacity - newStock
+
+            //Save values
+            val newProperties = currentProperties.copy(UGS = newUGS, EUS = newEUS)
+            val updatedTargetStation =
+                targetStation.copy(isActive = false, need = newNeed, stock = newStock)
+
+            spaceStationRepository.addSpaceStation(updatedTargetStation)
+            spaceStationRepository.updateCurrentSpaceStation(updatedTargetStation)
+            currentPropertiesRepository.updateCurrentProperties(newProperties)
+
+            if (newProperties.UGS == 0) {
+                spaceStationRepository.updateCurrentSpaceStation(world)
+                return Result.Success(true)
+            }
+            return Result.Success(false)
+
+        } catch (ex: Exception) {
+            return Result.Error(Exception())
+        }
     }
 }

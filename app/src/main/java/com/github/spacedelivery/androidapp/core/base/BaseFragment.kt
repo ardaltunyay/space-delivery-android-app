@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.github.spacedelivery.androidapp.R
-import com.github.spacedelivery.androidapp.core.extensions.toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(@LayoutRes private val layoutId: Int) :
     Fragment() {
@@ -37,7 +36,11 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding>(@LayoutRes
     private fun observeBaseStatus() {
         viewModel.errorState.observe(viewLifecycleOwner) { status ->
             val message = status.exception.message ?: getString(R.string.error_general_message)
-            toast(message, Toast.LENGTH_LONG)
+            MaterialAlertDialogBuilder(requireContext()).apply {
+                setTitle(message)
+                setPositiveButton("OK", null)
+            }.show()
+
         }
     }
 

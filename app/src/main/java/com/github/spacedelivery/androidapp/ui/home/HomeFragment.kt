@@ -11,6 +11,7 @@ import com.github.spacedelivery.androidapp.databinding.FragmentHomeBinding
 import com.github.spacedelivery.androidapp.ui.home.adapter.SpaceStationAdapter
 import com.github.spacedelivery.androidapp.ui.home.listener.ISpaceStationListener
 import com.github.spacedelivery.androidapp.ui.home.model.SpaceStationUIModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,6 +35,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
         viewModel.spaceStationListCombination.observe(viewLifecycleOwner) {
             spaceStationAdapter.updateList(it)
         }
+
+        viewModel.completeState.observe(viewLifecycleOwner) {
+            showComplete()
+        }
+    }
+
+    private fun showComplete() {
+        MaterialAlertDialogBuilder(requireContext()).apply {
+            setMessage("Success!! Welcome to world!")
+        }.show()
     }
 
     private fun setSpaceStationAdapter() {
@@ -63,8 +74,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
     override fun onTravelClicked(spaceStationUIModel: SpaceStationUIModel) {
         lifecycleScope.launch {
             toast(R.string.home_starting_travel_text)
-            delay(2000)
-            viewModel.getTravel(spaceStationUIModel.name)
+            delay(1000)
+            viewModel.getTravel(spaceStationUIModel)
         }
     }
 

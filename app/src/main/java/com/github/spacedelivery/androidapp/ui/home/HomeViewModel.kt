@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.github.spacedelivery.androidapp.core.base.BaseViewModel
+import com.github.spacedelivery.androidapp.core.livedata.LiveEvent
 import com.github.spacedelivery.androidapp.data.repository.CurrentPropertiesRepository
 import com.github.spacedelivery.androidapp.domain.model.CurrentPropertiesDomain
 import com.github.spacedelivery.androidapp.domain.model.SpaceStationDomain
@@ -48,6 +49,8 @@ class HomeViewModel(
         }
     }
 
+    val completeState = LiveEvent<Boolean>()
+
     init {
         init()
     }
@@ -81,8 +84,18 @@ class HomeViewModel(
         }
     }
 
-    fun getTravel(name: String) {
-        init()
+    fun getTravel(spaceStationUIModel: SpaceStationUIModel) {
+        viewModelScope.launch {
+            val station = spaceStationList.value?.find { it.name == spaceStationUIModel.name }
+            station?.let {
+                //spaceStationUseCase.getTravelToSpaceStation(it)
+                checkErrorAndContinue { spaceStationUseCase.getTravelToSpaceStation(it) }.onSuccess {
+                    init()
+                }.onError {
+                    fetchSpaceStations()
+                }
+            }
+        }
     }
 
     fun toggleFavorite(spaceStationUIModel: SpaceStationUIModel) {
