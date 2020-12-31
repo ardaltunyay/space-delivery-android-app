@@ -3,8 +3,8 @@ package com.github.spacedelivery.androidapp.ui.home.adapter.viewholder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.spacedelivery.androidapp.core.listeners.ItemClickListener
 import com.github.spacedelivery.androidapp.databinding.ListItemSpaceStationBinding
+import com.github.spacedelivery.androidapp.ui.home.listener.ISpaceStationListener
 import com.github.spacedelivery.androidapp.ui.home.model.SpaceStationUIModel
 
 class SpaceStationHolder(private val binding: ListItemSpaceStationBinding) :
@@ -20,7 +20,7 @@ class SpaceStationHolder(private val binding: ListItemSpaceStationBinding) :
 
     fun bind(
         spaceStationUIModel: SpaceStationUIModel,
-        clickListener: ItemClickListener<SpaceStationUIModel>?
+        clickListener: ISpaceStationListener?
     ) {
         with(binding) {
             this.spaceStationUIModel = spaceStationUIModel

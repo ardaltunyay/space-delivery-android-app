@@ -2,15 +2,15 @@ package com.github.spacedelivery.androidapp.ui.home.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.spacedelivery.androidapp.core.listeners.ItemClickListener
 import com.github.spacedelivery.androidapp.ui.home.adapter.viewholder.SpaceStationHolder
+import com.github.spacedelivery.androidapp.ui.home.listener.ISpaceStationListener
 import com.github.spacedelivery.androidapp.ui.home.model.SpaceStationUIModel
 
 class SpaceStationAdapter : RecyclerView.Adapter<SpaceStationHolder>() {
 
     private val _spaceStations = mutableListOf<SpaceStationUIModel>()
 
-    private var _clickListener: ItemClickListener<SpaceStationUIModel>? = null
+    private var _clickListener: ISpaceStationListener? = null
 
     fun updateList(spacesStations: List<SpaceStationUIModel>) {
         _spaceStations.clear()
@@ -18,7 +18,7 @@ class SpaceStationAdapter : RecyclerView.Adapter<SpaceStationHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setClickListener(clickListener: ItemClickListener<SpaceStationUIModel>) {
+    fun setClickListener(clickListener: ISpaceStationListener) {
         _clickListener = clickListener
     }
 

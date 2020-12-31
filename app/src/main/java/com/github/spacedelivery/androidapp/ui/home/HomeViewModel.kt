@@ -29,18 +29,19 @@ class HomeViewModel(
 
     val spaceVehicle = MutableLiveData<SpaceVehicleDomain>()
 
-    private val spaceStationList = MutableLiveData<List<SpaceStationUIModel>>()
+    private val spaceStationList = MutableLiveData<List<SpaceStationDomain>>()
 
     private val filteredSpaceStationList = queryText.map { getFilteredSpaceStationList(it) }
 
     private fun getFilteredSpaceStationList(searchText: String): List<SpaceStationUIModel> {
         val list = spaceStationList.value ?: emptyList()
-        return list.filter { it.name.contains(searchText, true) }
+        return list.map { it.toUIModel(currentSpaceStation.value) }
+            .filter { it.name.contains(searchText, true) }
     }
 
     val spaceStationListCombination = MediatorLiveData<List<SpaceStationUIModel>>().apply {
-        addSource(spaceStationList) {
-            value = it
+        addSource(spaceStationList) { domainList ->
+            value = domainList.map { it.toUIModel(currentSpaceStation.value) }
         }
         addSource(filteredSpaceStationList) {
             value = it
@@ -72,17 +73,26 @@ class HomeViewModel(
     private fun fetchSpaceStations() {
         viewModelScope.launch {
 
-            val currentStation = spaceStationUseCase.fetchCurrentSpacStation()
-            currentSpaceStation.value = currentStation
+            currentSpaceStation.value = spaceStationUseCase.fetchCurrentSpacStation()
 
             spaceStationUseCase.fetchSpaceStations().onSuccess { listDomain ->
-                spaceStationList.value = listDomain?.map { it.toUIModel(currentStation) }
+                spaceStationList.value = listDomain
             }
         }
     }
 
     fun getTravel(name: String) {
         init()
+    }
+
+    fun toggleFavorite(spaceStationUIModel: SpaceStationUIModel) {
+        viewModelScope.launch {
+            val station = spaceStationList.value?.find { it.name == spaceStationUIModel.name }
+            station?.let {
+                spaceStationUseCase.toggleFavoriteSpaceStation(it)
+                init()
+            }
+        }
     }
 
 }

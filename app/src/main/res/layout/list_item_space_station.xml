@@ -9,7 +9,7 @@
 
         <variable
             name="clickListener"
-            type="com.github.spacedelivery.androidapp.core.listeners.ItemClickListener&lt;SpaceStationUIModel>" />
+            type="com.github.spacedelivery.androidapp.ui.home.listener.ISpaceStationListener" />
 
         <variable
             name="spaceStationUIModel"
@@ -54,6 +54,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:onClick="@{() -> clickListener.onFavoriteClicked(spaceStationUIModel)}"
                 android:src="@{spaceStationUIModel.favorite ? @drawable/ic_favorite_selected : @drawable/ic_favorite_unselected}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -75,7 +76,7 @@
                 android:id="@+id/btnTravel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> clickListener.onClicked(spaceStationUIModel)}"
+                android:onClick="@{() -> clickListener.onTravelClicked(spaceStationUIModel)}"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="@string/home_space_station_travel_button"

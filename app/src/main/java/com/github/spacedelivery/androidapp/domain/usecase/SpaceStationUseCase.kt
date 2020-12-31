@@ -57,4 +57,14 @@ class SpaceStationUseCase(
 
         return remoteList.toList()
     }
+
+    suspend fun toggleFavoriteSpaceStation(spaceStationDomain: SpaceStationDomain) {
+        val local = spaceStationRepository.getSpaceStation(spaceStationDomain.name)
+        if (local == null) {
+            spaceStationRepository.addSpaceStation(spaceStationDomain.copy(isFavorite = !spaceStationDomain.isFavorite))
+        } else {
+            spaceStationRepository.updateSpaceStation(spaceStationDomain.copy(isFavorite = !spaceStationDomain.isFavorite))
+        }
+
+    }
 }

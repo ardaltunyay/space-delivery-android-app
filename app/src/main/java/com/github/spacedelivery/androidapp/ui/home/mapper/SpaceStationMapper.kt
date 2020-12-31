@@ -8,5 +8,5 @@ fun SpaceStationDomain.toUIModel(currentStation: SpaceStationDomain?): SpaceStat
         name = name,
         capacity = "$stock/$capacity",
         eus = "${this.getDistanceFrom(currentStation?.coordinateX ?: 0, currentStation?.coordinateY ?: 0)} EUS",
-        isFavorite = false
+        isFavorite = isFavorite
     )

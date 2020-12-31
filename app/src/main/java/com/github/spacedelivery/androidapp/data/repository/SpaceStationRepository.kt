@@ -41,4 +41,12 @@ class SpaceStationRepository(
         spaceStationDao.update(spaceStationDomain.toEntity())
     }
 
+    suspend fun addSpaceStation(spaceStationDomain: SpaceStationDomain) {
+        spaceStationDao.insert(spaceStationDomain.toEntity())
+    }
+
+    suspend fun getSpaceStation(name: String): SpaceStationDomain? {
+        return spaceStationDao.get(name)?.toDomain()
+    }
+
 }

@@ -7,14 +7,16 @@ import androidx.lifecycle.lifecycleScope
 import com.github.spacedelivery.androidapp.R
 import com.github.spacedelivery.androidapp.core.base.BaseFragment
 import com.github.spacedelivery.androidapp.core.extensions.toast
-import com.github.spacedelivery.androidapp.core.listeners.ItemClickListener
 import com.github.spacedelivery.androidapp.databinding.FragmentHomeBinding
 import com.github.spacedelivery.androidapp.ui.home.adapter.SpaceStationAdapter
+import com.github.spacedelivery.androidapp.ui.home.listener.ISpaceStationListener
+import com.github.spacedelivery.androidapp.ui.home.model.SpaceStationUIModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home) {
+class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.fragment_home),
+    ISpaceStationListener {
 
     override val viewModel: HomeViewModel by viewModel()
 
@@ -36,15 +38,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
 
     private fun setSpaceStationAdapter() {
         binding.vpSpaceStation.adapter = spaceStationAdapter
-        spaceStationAdapter.setClickListener(ItemClickListener {
-            lifecycleScope.launch {
-                toast(R.string.home_starting_travel_text)
-                delay(2000)
-                viewModel.getTravel(it.name)
-            }
-
-
-        })
+        spaceStationAdapter.setClickListener(this@HomeFragment)
     }
 
     private fun searchListener() {
@@ -64,6 +58,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>(R.layout.f
             }
 
         })
+    }
+
+    override fun onTravelClicked(spaceStationUIModel: SpaceStationUIModel) {
+        lifecycleScope.launch {
+            toast(R.string.home_starting_travel_text)
+            delay(2000)
+            viewModel.getTravel(spaceStationUIModel.name)
+        }
+    }
+
+    override fun onFavoriteClicked(spaceStationUIModel: SpaceStationUIModel) {
+        viewModel.toggleFavorite(spaceStationUIModel)
     }
 
 
