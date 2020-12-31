@@ -21,4 +21,7 @@ interface ISpaceStationDao {
     @Query("SELECT * from space_station WHERE name = :key")
     suspend fun get(key: String): SpaceStationEntity?
 
+    @Query("SELECT * from space_station")
+    suspend fun getAllSpaceStations(): List<SpaceStationEntity>?
+
 }

@@ -11,5 +11,6 @@ data class SpaceStationEntity(
     @ColumnInfo(name = "coordinate_y") val coordinateY: Int,
     @ColumnInfo(name = "capacity") val capacity: Int,
     @ColumnInfo(name = "stock") val stock: Int,
-    @ColumnInfo(name = "need") val need: Int
+    @ColumnInfo(name = "need") val need: Int,
+    @ColumnInfo(name = "favorite") val isFavorite: Boolean
 )

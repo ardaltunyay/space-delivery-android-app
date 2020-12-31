@@ -7,6 +7,12 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single { SpaceVehicleRepository(spaceVehicleDao = get()) }
-    single { SpaceStationRepository(remoteDataSource = get(), localPref = get()) }
+    single {
+        SpaceStationRepository(
+            remoteDataSource = get(),
+            localPref = get(),
+            spaceStationDao = get()
+        )
+    }
     single { CurrentPropertiesRepository(localPref = get()) }
 }
