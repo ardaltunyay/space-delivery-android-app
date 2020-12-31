@@ -25,3 +25,14 @@ fun SpaceStationEntity.toDomain(): SpaceStationDomain =
         need = need,
         isFavorite = isFavorite
     )
+
+fun SpaceStationDomain.toEntity(): SpaceStationEntity =
+    SpaceStationEntity(
+        name = name,
+        coordinateX = coordinateX,
+        coordinateY = coordinateY,
+        capacity = capacity,
+        stock = stock,
+        need = need,
+        isFavorite = isFavorite
+    )
