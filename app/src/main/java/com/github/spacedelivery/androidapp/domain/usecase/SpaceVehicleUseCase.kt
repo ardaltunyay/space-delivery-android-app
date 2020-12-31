@@ -36,7 +36,8 @@ class SpaceVehicleUseCase(
             coordinateY = 0,
             capacity = 0,
             stock = 0,
-            need = 0
+            need = 0,
+            isFavorite = false
         )
 
         val currentPropertiesDomain = CurrentPropertiesDomain(

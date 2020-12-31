@@ -20,4 +20,11 @@
     <string name="create_space_vehicle_speed">Speed</string>
     <string name="create_space_vehicle_capacity">Capacity</string>
 
+    <!-- Home Screen -->
+    <string name="home_ugs">UGS:  %1$d</string>
+    <string name="home_eus">EUS: %1$d</string>
+    <string name="home_ds">DS: %1$d</string>
+    <string name="home_space_station_travel_button">Travel</string>
+    <string name="home_search_space_station_text">Search station</string>
+
 </resources>

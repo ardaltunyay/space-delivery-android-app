@@ -13,4 +13,21 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="HomePropertyStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="singleLine">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="HomePropertyStyle.Primary">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:background">@drawable/background_home_property</item>
+    </style>
+
+    <style name="HomePropertyStyle.Outline">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:background">@drawable/background_home_property_outline</item>
+    </style>
 </resources>
