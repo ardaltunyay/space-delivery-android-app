@@ -9,7 +9,8 @@ import com.github.spacedelivery.androidapp.ui.create_space_vehicle.model.CreateS
 import com.github.spacedelivery.androidapp.ui.create_space_vehicle.model.PropertyUIModel
 import kotlinx.coroutines.launch
 
-class CreateSpaceVehicleViewModel(private val spaceVehicleUseCase: SpaceVehicleUseCase) :
+class CreateSpaceVehicleViewModel(
+    private val spaceVehicleUseCase: SpaceVehicleUseCase) :
     BaseViewModel() {
 
     val actionState = MutableLiveData<CreateSpaceVehicleActionState>()
