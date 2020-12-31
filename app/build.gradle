@@ -63,6 +63,7 @@ dependencies {
     implementation androidX.appCompat
     implementation androidX.constraint
     implementation androidX.recyclerView
+    implementation androidX.viewPager2
     implementation androidX.legacy
     implementation androidX.lifecycle.liveDataKtx
     implementation androidX.lifecycle.viewModelKtx

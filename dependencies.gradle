@@ -10,6 +10,7 @@ ext {
     def materialVersion = '1.2.1'
     def constraintLayoutVersion = '2.0.4'
     def recyclerViewVersion = '1.1.0'
+    def viewPager2Version = '1.0.0'
     def lifecycleVersion = '2.2.0'
     def roomVersion = "2.2.6"
     def retrofitVersion = '2.9.0'
@@ -23,21 +24,22 @@ ext {
                     material    : "com.google.android.material:material:$materialVersion",
                     constraint  : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
                     recyclerView: "androidx.recyclerview:recyclerview:$recyclerViewVersion",
+                    viewPager2  : "androidx.viewpager2:viewpager2:$viewPager2Version",
                     legacy      : "androidx.legacy:legacy-support-v4:1.0.0",
                     lifecycle   : [
                             liveDataKtx : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
-                            viewModelKtx : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+                            viewModelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
                     ]
 
             ],
 
             unitTest = [
-                    jUnit: 'junit:junit:4.13.1',
-                    mockk: 'io.mockk:mockk:1.10.2',
-                    kotlinTestRunner: 'io.kotest:kotest-runner-junit5:4.3.1',
-                    jFixture: 'com.flextrade.jfixture:jfixture:2.7.2',
+                    jUnit              : 'junit:junit:4.13.1',
+                    mockk              : 'io.mockk:mockk:1.10.2',
+                    kotlinTestRunner   : 'io.kotest:kotest-runner-junit5:4.3.1',
+                    jFixture           : 'com.flextrade.jfixture:jfixture:2.7.2',
                     androidXCoreTesting: 'androidx.arch.core:core-testing:2.1.0',
-                    coroutinesTest: 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1'
+                    coroutinesTest     : 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1'
             ],
 
             androidTest = [
@@ -52,8 +54,8 @@ ext {
 
             room = [
                     runtime: "androidx.room:room-runtime:$roomVersion",
-                    kapt: "androidx.room:room-compiler:$roomVersion",
-                    ktx: "androidx.room:room-ktx:$roomVersion"
+                    kapt   : "androidx.room:room-compiler:$roomVersion",
+                    ktx    : "androidx.room:room-ktx:$roomVersion"
             ],
 
             koin = [
@@ -62,13 +64,13 @@ ext {
             ],
 
             square = [
-                    retrofit : [
-                            retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion",
+                    retrofit: [
+                            retrofit     : "com.squareup.retrofit2:retrofit:$retrofitVersion",
                             converterGson: "com.squareup.retrofit2:converter-gson:$retrofitVersion"
                     ],
-                    okhttp: [
-                            bom: "com.squareup.okhttp3:okhttp-bom:$okhttpVersion",
-                            okhttp: "com.squareup.okhttp3:okhttp",
+                    okhttp  : [
+                            bom               : "com.squareup.okhttp3:okhttp-bom:$okhttpVersion",
+                            okhttp            : "com.squareup.okhttp3:okhttp",
                             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor"
                     ]
 
