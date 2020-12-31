@@ -5,18 +5,24 @@
 
     <data>
 
+        <import type="com.github.spacedelivery.androidapp.ui.home.model.SpaceStationUIModel" />
+
+        <variable
+            name="clickListener"
+            type="com.github.spacedelivery.androidapp.core.listeners.ItemClickListener&lt;SpaceStationUIModel>" />
+
         <variable
             name="spaceStationUIModel"
-            type="com.github.spacedelivery.androidapp.ui.home.model.SpaceStationUIModel" />
+            type="SpaceStationUIModel" />
 
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardElevation="6dp"
         android:layout_margin="32dp"
-        app:cardBackgroundColor="?attr/colorBackgroundFloating">
+        app:cardBackgroundColor="?attr/colorBackgroundFloating"
+        app:cardElevation="6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,11 +44,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="@{spaceStationUIModel.eus}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCapacity"
-                android:text="@{spaceStationUIModel.eus}"
                 tools:text="245 EUS" />
 
             <ImageView
@@ -69,13 +75,14 @@
                 android:id="@+id/btnTravel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> clickListener.onClicked(spaceStationUIModel)}"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
+                android:text="@string/home_space_station_travel_button"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/home_space_station_travel_button" />
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

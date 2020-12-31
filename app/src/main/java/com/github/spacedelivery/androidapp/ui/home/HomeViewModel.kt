@@ -48,6 +48,10 @@ class HomeViewModel(
     }
 
     init {
+        init()
+    }
+
+    private fun init() {
         fetchCurrentProperties()
         fetchSpaceStations()
         fetchSpaceVehicle()
@@ -75,6 +79,10 @@ class HomeViewModel(
                 spaceStationList.value = listDomain?.map { it.toUIModel(currentStation) }
             }
         }
+    }
+
+    fun getTravel(name: String) {
+        init()
     }
 
 }
